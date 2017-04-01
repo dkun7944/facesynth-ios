@@ -14,6 +14,7 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     // MARK: - Properties
     
     var waveform: WaveformView!
+    var waveformIdle: Bool = true
     var oscillator: AKFMOscillator = AKFMOscillator()
     
     var startingFrequency: Double = 220
@@ -63,11 +64,7 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func addWaveform() {
-        let waveformHeight: CGFloat = 400
-        let centerY = view.bounds.height / 2 - waveformHeight / 2
-        let frame = CGRect(x: 0, y: centerY, width: view.bounds.width, height: waveformHeight)
-        
-        waveform = WaveformView(frame: frame)
+        waveform = WaveformView(frame: view.frame)
         view.addSubview(waveform)
         view.backgroundColor = .black
     }
@@ -78,7 +75,7 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         switch gestureRecognizer.state {
         case .began:
             self.beganPanning(gestureRecognizer)
-        case .ended, .cancelled:
+        case .ended, .cancelled, .failed:
             self.stoppedPanning()
         default:
             break
@@ -95,11 +92,13 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func viewForceTouched(_ gestureRecognizer: ForceTouchGestureRecognizer) {
         DispatchQueue.global(qos: .background).async {
-            self.oscillator.carrierMultiplier = Double(gestureRecognizer.force) + 1
+            self.oscillator.carrierMultiplier = Double(gestureRecognizer.force * 3) + 1
+            self.updateWaveform()
         }
     }
     
     func beganPanning(_ gestureRecognizer: UIGestureRecognizer) {
+        waveformIdle = false
         startingFrequency = oscillator.baseFrequency
         oscillator.play()
         
@@ -108,11 +107,8 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         oscillator.rampTime = 0.2
         
         DispatchQueue.main.async {
-            let frequency = CGFloat(self.oscillator.baseFrequency)
-            let modulation = CGFloat(self.oscillator.modulationIndex)
-            
             self.waveform.startNote()
-            self.waveform.update(withRealFrequency: frequency, modulation: modulation)
+            self.updateWaveform()
         }
     }
     
@@ -120,18 +116,28 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         updateOscillator(gestureRecognizer)
         
         DispatchQueue.main.async {
-            let frequency = CGFloat(self.oscillator.baseFrequency)
-            let modulation = CGFloat(self.oscillator.modulationIndex)
-            self.waveform.update(withRealFrequency: frequency, modulation: modulation)
+            self.updateWaveform()
         }
     }
     
     func stoppedPanning() {
+        waveformIdle = true
         oscillator.stop()
         
         DispatchQueue.main.async {
             self.waveform.stopNote()
         }
+    }
+    
+    // MARK: - Waveform Updates
+    
+    func updateWaveform() {
+        if waveformIdle { return }
+        
+        let frequency = CGFloat(self.oscillator.baseFrequency)
+        let modulation = CGFloat(self.oscillator.modulationIndex)
+        let carrier = CGFloat(self.oscillator.carrierMultiplier)
+        self.waveform.update(withRealFrequency: frequency, modulation: modulation, carrier: carrier)
     }
     
     // MARK: - Oscillator Updates

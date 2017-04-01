@@ -6,26 +6,27 @@ public class WaveformView: UIView {
     
     public var numberOfWaves: Int = 5
     public var waveColor: UIColor = .lightGray
-    public var currentFrequency: CGFloat = 1.5
-    public var density: CGFloat = 1
-    public var currentPhaseShift: CGFloat = 0.05
-    public var amplitude: CGFloat = 0
+    
+    var density: CGFloat = 1
     
     public var idleAmplitude: CGFloat = 0.01
     public var idleFrequency: CGFloat = 1.5
     public var idlePhaseShift: CGFloat = 0.05
     
     var updatingFrequency: Bool = false
+    var currentFrequency: CGFloat = 1.5
     var startFrequency: CGFloat = 1.5
     var targetFrequency: CGFloat = 1.5
     
     var updatingPhaseShift: Bool = false
+    var currentPhaseShift: CGFloat = 0.05
     var startPhaseShift: CGFloat = 0.05
     var targetPhaseShift: CGFloat = 0.05
     
-    var maxAmplitude: CGFloat = 0.5
-    var startingNote: Bool = false
-    var stoppingNote: Bool = false
+    var updatingAmplitude: Bool = false
+    var currentAmplitude: CGFloat = 0
+    var startAmplitude: CGFloat = 0
+    var targetAmplitude: CGFloat = 0.5
     
     var phase: CGFloat = 0
     var displayLink: CADisplayLink!
@@ -51,20 +52,17 @@ public class WaveformView: UIView {
     // MARK: - Start / Stop Notes
     
     public func startNote() {
-        startingNote = true
-        stoppingNote = false
+        setNewAmplitude(0.2)
     }
     
     public func stopNote() {
-        startingNote = false
-        stoppingNote = true
-        
+        setNewAmplitude(idleAmplitude)
         setNewFrequency(idleFrequency)
         setNewPhaseShift(idlePhaseShift)
         waveColor = .lightGray
     }
     
-    public func update(withRealFrequency frequency: CGFloat, modulation: CGFloat) {
+    public func update(withRealFrequency frequency: CGFloat, modulation: CGFloat, carrier: CGFloat) {
         let waveformFrequency = frequency / 150
         setNewFrequency(waveformFrequency)
         
@@ -73,17 +71,24 @@ public class WaveformView: UIView {
         
         setColor(fromModulation: modulation)
         setDensity(fromModulation: modulation)
+        setAmplitude(fromCarrier: carrier)
+    }
+    
+    func setNewAmplitude(_ newValue: CGFloat) {
+        targetAmplitude = max(newValue, idleAmplitude)
+        startAmplitude = currentAmplitude
+        updatingAmplitude = true
     }
     
     func setNewFrequency(_ newValue: CGFloat) {
         targetFrequency = max(newValue, idleFrequency)
-        startFrequency = targetFrequency
+        startFrequency = currentFrequency
         updatingFrequency = true
     }
     
     func setNewPhaseShift(_ newValue: CGFloat) {
         targetPhaseShift = max(newValue, idlePhaseShift)
-        startPhaseShift = targetPhaseShift
+        startPhaseShift = currentPhaseShift
         updatingPhaseShift = true
     }
     
@@ -99,7 +104,14 @@ public class WaveformView: UIView {
     
     func setDensity(fromModulation modulation: CGFloat) {
         density = (modulation + 30) / 6
-        print(density)
+    }
+    
+    func setAmplitude(fromCarrier carrier: CGFloat) {
+        if updatingAmplitude {
+            targetAmplitude = carrier / 6.0
+        } else {
+            currentAmplitude = carrier / 6.0
+        }
     }
     
     // MARK: - Animation
@@ -111,20 +123,14 @@ public class WaveformView: UIView {
     }
     
     func updateStartStopNote() {
-        if startingNote {
-            if amplitude < maxAmplitude {
-                update(withLevel: amplitude + 0.1, frequency: currentFrequency)
+        if updatingAmplitude {
+            if currentAmplitude < targetAmplitude {
+                let newAmplitude = 
+                update(withLevel: currentAmplitude + abs(targetAmplitude - startAmplitude) / 30, frequency: currentFrequency, phaseShift: currentPhaseShift)
+            } else if currentAmplitude > targetAmplitude {
+                update(withLevel: currentAmplitude - abs(targetAmplitude - startAmplitude) / 30, frequency: currentFrequency, phaseShift: currentPhaseShift)
             } else {
-                startingNote = false
-                stoppingNote = false
-                updateDefault()
-            }
-        } else if stoppingNote {
-            if amplitude > idleAmplitude {
-                update(withLevel: amplitude - 0.1, frequency: currentFrequency)
-            } else {
-                startingNote = false
-                stoppingNote = false
+                updatingAmplitude = false
                 updateDefault()
             }
         } else {
@@ -135,9 +141,9 @@ public class WaveformView: UIView {
     func updateFrequency() {
         if updatingFrequency {
             if currentFrequency < targetFrequency {
-                update(withLevel: amplitude, frequency: targetFrequency + (targetFrequency - startFrequency) / 10)
+                update(withLevel: currentAmplitude, frequency: currentFrequency + abs(targetFrequency - startFrequency) / 30, phaseShift: currentPhaseShift)
             } else if currentFrequency > targetFrequency {
-                update(withLevel: amplitude, frequency: targetFrequency - (targetFrequency - startFrequency) / 10)
+                update(withLevel: currentAmplitude, frequency: currentFrequency - abs(targetFrequency - startFrequency) / 30, phaseShift: currentPhaseShift)
             } else {
                 updatingFrequency = false
                 updateDefault()
@@ -150,26 +156,28 @@ public class WaveformView: UIView {
     func updatePhaseShift() {
         if updatingPhaseShift {
             if currentPhaseShift < targetPhaseShift {
-                currentPhaseShift = targetPhaseShift + (targetPhaseShift - startPhaseShift) / 10
+                update(withLevel: currentAmplitude, frequency: currentFrequency, phaseShift: currentPhaseShift + abs(targetPhaseShift - startPhaseShift) / 30)
             } else if currentPhaseShift > targetPhaseShift {
-                currentPhaseShift = targetPhaseShift - (targetPhaseShift - startPhaseShift) / 10
+                update(withLevel: currentAmplitude, frequency: currentFrequency, phaseShift: currentPhaseShift - abs(targetPhaseShift - startPhaseShift) / 30)
             } else {
                 updatingPhaseShift = false
+                updateDefault()
             }
+        } else {
+            updateDefault()
         }
-        
-        updateDefault()
     }
     
     func updateDefault() {
-        update(withLevel: amplitude, frequency: currentFrequency)
+        update(withLevel: currentAmplitude, frequency: currentFrequency, phaseShift: currentPhaseShift)
     }
     
-    func update(withLevel level: CGFloat, frequency: CGFloat) {
-        phase -= currentPhaseShift
-        amplitude = max(level, idleAmplitude)
-        currentFrequency = frequency
+    func update(withLevel level: CGFloat, frequency: CGFloat, phaseShift: CGFloat) {
+        currentAmplitude = max(level, idleAmplitude)
+        currentFrequency = max(frequency, idleFrequency)
+        currentPhaseShift = max(phaseShift, idlePhaseShift)
 
+        phase -= currentPhaseShift
         setNeedsDisplay()
     }
     
@@ -190,7 +198,7 @@ public class WaveformView: UIView {
             
             let maxAmplitude: CGFloat = halfHeight - 4
             let progress: CGFloat = CGFloat(1 - i / numberOfWaves)
-            let normedAmplitude: CGFloat = (1.5 * progress - 0.5) * amplitude
+            let normedAmplitude: CGFloat = (1.5 * progress - 0.5) * currentAmplitude
             
             let multiplier: CGFloat = min(1.0, (progress / 3 * 2) + (1 / 3))
             
