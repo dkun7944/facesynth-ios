@@ -4,14 +4,13 @@ public class WaveformView: UIView {
     
     // MARK: - Properties
     
-    public var numberOfWaves: Int = 5
     public var waveColor: UIColor = .lightGray
-    var density: CGFloat = 1
-    var phase: CGFloat = 0
-    
     public var idleAmplitude: CGFloat = 0.01
     public var idleFrequency: CGFloat = 1.5
     public var idlePhaseShift: CGFloat = 0.05
+    
+    var density: CGFloat = 1
+    var phase: CGFloat = 0
     
     var updatingFrequency: Bool = false
     var currentFrequency: CGFloat = 1.5
@@ -192,35 +191,28 @@ public class WaveformView: UIView {
         backgroundColor?.set()
         context?.fill(bounds)
         
-        for i in 0..<numberOfWaves {
-            context = UIGraphicsGetCurrentContext()
-            context?.setLineWidth(2.0)
+        context = UIGraphicsGetCurrentContext()
+        context?.setLineWidth(2.0)
+        
+        let halfHeight = bounds.height / 2
+        let width = bounds.width
+        let mid = width / 2
+        let maxAmplitude: CGFloat = halfHeight - 4
+        
+        waveColor.set()
+        
+        for x in stride(from: 0, to: width + density, by: density) {
+            let scaling: CGFloat = -pow(1 / mid * (x - mid), 2) + 1
+            let y: CGFloat = scaling * maxAmplitude * currentAmplitude * sin(2 * .pi * (x / width) * currentFrequency + phase) + halfHeight
             
-            let halfHeight = bounds.height / 2
-            let width = bounds.width
-            let mid = width / 2
-            
-            let maxAmplitude: CGFloat = halfHeight - 4
-            let progress: CGFloat = CGFloat(1 - i / numberOfWaves)
-            let normedAmplitude: CGFloat = (1.5 * progress - 0.5) * currentAmplitude
-            
-            let multiplier: CGFloat = min(1.0, (progress / 3 * 2) + (1 / 3))
-            
-            waveColor.withAlphaComponent(multiplier * waveColor.cgColor.alpha).set()
-            
-            for x in stride(from: 0, to: width + density, by: density) {
-                let scaling: CGFloat = -pow(1 / mid * (x - mid), 2) + 1
-                let y: CGFloat = scaling * maxAmplitude * normedAmplitude * sin(2 * .pi * (x / width) * currentFrequency + phase) + halfHeight
-                
-                let point: CGPoint = CGPoint(x: x, y: y)
-                if x == 0 {
-                    context?.move(to: point)
-                } else {
-                    context?.addLine(to: point)
-                }
+            let point: CGPoint = CGPoint(x: x, y: y)
+            if x == 0 {
+                context?.move(to: point)
+            } else {
+                context?.addLine(to: point)
             }
-            
-            context?.strokePath()
         }
+        
+        context?.strokePath()
     }
 }
