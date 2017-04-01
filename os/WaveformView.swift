@@ -4,6 +4,12 @@ public class WaveformView: UIView {
     
     // MARK: - Properties
     
+    public var rampTime: TimeInterval = 0.2 {
+        didSet {
+            rampFrames = 60 * CGFloat(rampTime)
+        }
+    }
+    
     public var waveColor: UIColor = .lightGray
     public var idleAmplitude: CGFloat = 0.01
     public var idleFrequency: CGFloat = 1.5
@@ -11,6 +17,7 @@ public class WaveformView: UIView {
     
     var density: CGFloat = 1
     var phase: CGFloat = 0
+    var rampFrames: CGFloat!
     
     var updatingFrequency: Bool = false
     var currentFrequency: CGFloat = 1.5
@@ -43,6 +50,7 @@ public class WaveformView: UIView {
     
     func setup() {
         backgroundColor = .black
+        rampFrames = 60 * CGFloat(rampTime)
         displayLink = CADisplayLink(target: self, selector: #selector(updateDisplayLink))
         displayLink.add(to: .current, forMode: .defaultRunLoopMode)
     }
@@ -123,10 +131,10 @@ public class WaveformView: UIView {
     func updateStartStopNote() {
         if updatingAmplitude {
             if currentAmplitude < targetAmplitude {
-                let newAmplitude = currentAmplitude + abs(targetAmplitude - startAmplitude) / 30
+                let newAmplitude = currentAmplitude + abs(targetAmplitude - startAmplitude) / rampFrames
                 update(withLevel: newAmplitude, frequency: currentFrequency, phaseShift: currentPhaseShift)
             } else if currentAmplitude > targetAmplitude {
-                let newAmplitude = currentAmplitude - abs(targetAmplitude - startAmplitude) / 30
+                let newAmplitude = currentAmplitude - abs(targetAmplitude - startAmplitude) / rampFrames
                 update(withLevel: newAmplitude, frequency: currentFrequency, phaseShift: currentPhaseShift)
             } else {
                 updatingAmplitude = false
@@ -140,10 +148,10 @@ public class WaveformView: UIView {
     func updateFrequency() {
         if updatingFrequency {
             if currentFrequency < targetFrequency {
-                let newFrequency = currentFrequency + abs(targetFrequency - startFrequency) / 30
+                let newFrequency = currentFrequency + abs(targetFrequency - startFrequency) / rampFrames
                 update(withLevel: currentAmplitude, frequency: newFrequency, phaseShift: currentPhaseShift)
             } else if currentFrequency > targetFrequency {
-                let newFrequency = currentFrequency - abs(targetFrequency - startFrequency) / 30
+                let newFrequency = currentFrequency - abs(targetFrequency - startFrequency) / rampFrames
                 update(withLevel: currentAmplitude, frequency: newFrequency, phaseShift: currentPhaseShift)
             } else {
                 updatingFrequency = false
@@ -157,10 +165,10 @@ public class WaveformView: UIView {
     func updatePhaseShift() {
         if updatingPhaseShift {
             if currentPhaseShift < targetPhaseShift {
-                let newPhaseShift = currentPhaseShift + abs(targetPhaseShift - startPhaseShift) / 30
+                let newPhaseShift = currentPhaseShift + abs(targetPhaseShift - startPhaseShift) / rampFrames
                 update(withLevel: currentAmplitude, frequency: currentFrequency, phaseShift: newPhaseShift)
             } else if currentPhaseShift > targetPhaseShift {
-                let newPhaseShift = currentPhaseShift - abs(targetPhaseShift - startPhaseShift) / 30
+                let newPhaseShift = currentPhaseShift - abs(targetPhaseShift - startPhaseShift) / rampFrames
                 update(withLevel: currentAmplitude, frequency: currentFrequency, phaseShift: newPhaseShift)
             } else {
                 updatingPhaseShift = false
