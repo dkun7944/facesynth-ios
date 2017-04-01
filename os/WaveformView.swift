@@ -7,7 +7,7 @@ public class WaveformView: UIView {
     public var numberOfWaves: Int = 5
     public var waveColor: UIColor = .lightGray
     public var currentFrequency: CGFloat = 1.5
-    public var density: CGFloat = 5
+    public var density: CGFloat = 1
     public var currentPhaseShift: CGFloat = 0.05
     public var amplitude: CGFloat = 0
     
