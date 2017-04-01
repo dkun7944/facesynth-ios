@@ -72,6 +72,7 @@ public class WaveformView: UIView {
         setNewPhaseShift(shift)
         
         setColor(fromModulation: modulation)
+        setDensity(fromModulation: modulation)
     }
     
     func setNewFrequency(_ newValue: CGFloat) {
@@ -94,6 +95,11 @@ public class WaveformView: UIView {
             let blendedColor = UIColor.blend(color1: .pastelBlue, intensity1: blueIntensity, color2: .pastelRed, intensity2: orangeIntensity)
             self.waveColor = blendedColor
         }
+    }
+    
+    func setDensity(fromModulation modulation: CGFloat) {
+        density = (modulation + 30) / 6
+        print(density)
     }
     
     // MARK: - Animation
