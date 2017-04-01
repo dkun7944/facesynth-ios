@@ -24,7 +24,7 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupOscillator()
-        setupPanGestureRecognizer()
+        setupGestureRecognizers()
     }
     
     override public func viewWillAppear(_ animated: Bool) {
@@ -44,7 +44,7 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         AudioKit.start()
     }
     
-    func setupPanGestureRecognizer() {
+    func setupGestureRecognizers() {
         let panGR = ImmediatePanGestureRecognizer(target: self, action: #selector(viewPanned(_:)))
         panGR.delegate = self
         view.addGestureRecognizer(panGR)
