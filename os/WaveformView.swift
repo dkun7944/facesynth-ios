@@ -6,8 +6,8 @@ public class WaveformView: UIView {
     
     public var numberOfWaves: Int = 5
     public var waveColor: UIColor = .lightGray
-    
     var density: CGFloat = 1
+    var phase: CGFloat = 0
     
     public var idleAmplitude: CGFloat = 0.01
     public var idleFrequency: CGFloat = 1.5
@@ -28,7 +28,6 @@ public class WaveformView: UIView {
     var startAmplitude: CGFloat = 0
     var targetAmplitude: CGFloat = 0.5
     
-    var phase: CGFloat = 0
     var displayLink: CADisplayLink!
     
     // MARK: - Initialization
@@ -125,50 +124,55 @@ public class WaveformView: UIView {
     func updateStartStopNote() {
         if updatingAmplitude {
             if currentAmplitude < targetAmplitude {
-                let newAmplitude = 
-                update(withLevel: currentAmplitude + abs(targetAmplitude - startAmplitude) / 30, frequency: currentFrequency, phaseShift: currentPhaseShift)
+                let newAmplitude = currentAmplitude + abs(targetAmplitude - startAmplitude) / 30
+                update(withLevel: newAmplitude, frequency: currentFrequency, phaseShift: currentPhaseShift)
             } else if currentAmplitude > targetAmplitude {
-                update(withLevel: currentAmplitude - abs(targetAmplitude - startAmplitude) / 30, frequency: currentFrequency, phaseShift: currentPhaseShift)
+                let newAmplitude = currentAmplitude - abs(targetAmplitude - startAmplitude) / 30
+                update(withLevel: newAmplitude, frequency: currentFrequency, phaseShift: currentPhaseShift)
             } else {
                 updatingAmplitude = false
-                updateDefault()
+                updateWithDefaultValues()
             }
         } else {
-            updateDefault()
+            updateWithDefaultValues()
         }
     }
     
     func updateFrequency() {
         if updatingFrequency {
             if currentFrequency < targetFrequency {
-                update(withLevel: currentAmplitude, frequency: currentFrequency + abs(targetFrequency - startFrequency) / 30, phaseShift: currentPhaseShift)
+                let newFrequency = currentFrequency + abs(targetFrequency - startFrequency) / 30
+                update(withLevel: currentAmplitude, frequency: newFrequency, phaseShift: currentPhaseShift)
             } else if currentFrequency > targetFrequency {
-                update(withLevel: currentAmplitude, frequency: currentFrequency - abs(targetFrequency - startFrequency) / 30, phaseShift: currentPhaseShift)
+                let newFrequency = currentFrequency - abs(targetFrequency - startFrequency) / 30
+                update(withLevel: currentAmplitude, frequency: newFrequency, phaseShift: currentPhaseShift)
             } else {
                 updatingFrequency = false
-                updateDefault()
+                updateWithDefaultValues()
             }
         } else {
-            updateDefault()
+            updateWithDefaultValues()
         }
     }
     
     func updatePhaseShift() {
         if updatingPhaseShift {
             if currentPhaseShift < targetPhaseShift {
-                update(withLevel: currentAmplitude, frequency: currentFrequency, phaseShift: currentPhaseShift + abs(targetPhaseShift - startPhaseShift) / 30)
+                let newPhaseShift = currentPhaseShift + abs(targetPhaseShift - startPhaseShift) / 30
+                update(withLevel: currentAmplitude, frequency: currentFrequency, phaseShift: newPhaseShift)
             } else if currentPhaseShift > targetPhaseShift {
-                update(withLevel: currentAmplitude, frequency: currentFrequency, phaseShift: currentPhaseShift - abs(targetPhaseShift - startPhaseShift) / 30)
+                let newPhaseShift = currentPhaseShift - abs(targetPhaseShift - startPhaseShift) / 30
+                update(withLevel: currentAmplitude, frequency: currentFrequency, phaseShift: newPhaseShift)
             } else {
                 updatingPhaseShift = false
-                updateDefault()
+                updateWithDefaultValues()
             }
         } else {
-            updateDefault()
+            updateWithDefaultValues()
         }
     }
     
-    func updateDefault() {
+    func updateWithDefaultValues() {
         update(withLevel: currentAmplitude, frequency: currentFrequency, phaseShift: currentPhaseShift)
     }
     
