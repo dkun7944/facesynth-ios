@@ -104,10 +104,7 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         oscillator.play()
         
         oscillator.rampTime = 0
-        let location = gestureRecognizer.location(in: view)
-        let modulation = Double(location.x * 0.16) - 30
-        let newModulation = modulation.clamped(to: -30...30)
-        self.oscillator.modulationIndex = newModulation
+        updateOscillatorModulation(gestureRecognizer.location(in: view))
         oscillator.rampTime = 0.2
         
         DispatchQueue.main.async {
@@ -143,14 +140,20 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         let location = gestureRecognizer.location(in: view)
         let translation = gestureRecognizer.translation(in: view)
         
-        let changeInFrequency = Double(-translation.y * 1.5)
+        updateOscillatorModulation(location)
+        updateOscillatorFrequency(translation)
+    }
+    
+    func updateOscillatorModulation(_ location: CGPoint) {
         let modulation = Double(location.x * 0.16) - 30
-        
-        let newFrequency = (self.startingFrequency + changeInFrequency).clamped(to: 110...1760)
         let newModulation = modulation.clamped(to: -30...30)
-        
-        self.oscillator.baseFrequency = newFrequency
         self.oscillator.modulationIndex = newModulation
+    }
+    
+    func updateOscillatorFrequency(_ translation: CGPoint) {
+        let changeInFrequency = Double(-translation.y * 1.5)
+        let newFrequency = (self.startingFrequency + changeInFrequency).clamped(to: 110...1760)
+        oscillator.baseFrequency = newFrequency
     }
     
     // MARK: - Status Bar
