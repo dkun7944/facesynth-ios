@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:AudioKit-3.5/AudioKit/iOS/AudioKit For iOS.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:playground.playground">
+   </FileRef>
+</Workspace>
