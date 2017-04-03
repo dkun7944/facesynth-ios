@@ -10,6 +10,6 @@ Make sure you build the project before running the playground.
 
 ## SCREENSHOTS
 
-![Screenshot 1](screenshots/1.png)
-![Screenshot 2](screenshots/2.png)
-![Screenshot 3](screenshots/3.png)
+![](screenshots/1.PNG)
+![](screenshots/2.PNG)
+![](screenshots/3.png)
