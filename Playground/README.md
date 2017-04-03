@@ -1,4 +1,4 @@
-#WWDC 2017 Scholaship Application
+# WWDC 2017 Scholaship Application
 
 os is a sound machine. Move your finger around the screen to make dope sounds!
 
