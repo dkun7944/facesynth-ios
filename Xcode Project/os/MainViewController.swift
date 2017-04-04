@@ -35,7 +35,9 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        performSegue(withIdentifier: "mainToSwipeTutorial", sender: nil)
+        if !UserDefaults.standard.hasSeenTutorial() {
+            performSegue(withIdentifier: "mainToSwipeTutorial", sender: nil)
+        }
     }
     
     func setupOscillator() {

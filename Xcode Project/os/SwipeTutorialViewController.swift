@@ -88,6 +88,7 @@ class SwipeTutorialViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func gotItPressed(_ sender: Any) {
+        UserDefaults.standard.sawTutorial()
         dismiss(animated: true, completion: nil)
     }
     
