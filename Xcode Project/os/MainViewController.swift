@@ -32,6 +32,12 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         addWaveform()
     }
     
+    override public func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        performSegue(withIdentifier: "mainToSwipeTutorial", sender: nil)
+    }
+    
     func setupOscillator() {
         oscillator.amplitude = 1
         oscillator.rampTime = 0.2

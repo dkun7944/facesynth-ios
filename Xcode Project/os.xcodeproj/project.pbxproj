@@ -15,6 +15,9 @@
 		4C5D15851E8FD76E00D8F15C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C5D15831E8FD76E00D8F15C /* LaunchScreen.storyboard */; };
 		4C5D158E1E8FD7DE00D8F15C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D158C1E8FD7DE00D8F15C /* Extensions.swift */; };
 		4C5D158F1E8FD7DE00D8F15C /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D158D1E8FD7DE00D8F15C /* WaveformView.swift */; };
+		4C74EC961E944D5000B419C9 /* SwipeTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74EC951E944D5000B419C9 /* SwipeTutorialViewController.swift */; };
+		4C74EC981E944FA200B419C9 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C74EC971E944FA200B419C9 /* Lato-Regular.ttf */; };
+		4C74EC9A1E944FB300B419C9 /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C74EC991E944FB300B419C9 /* Lato-Semibold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		4C5D15861E8FD76E00D8F15C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C5D158C1E8FD7DE00D8F15C /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4C5D158D1E8FD7DE00D8F15C /* WaveformView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
+		4C74EC951E944D5000B419C9 /* SwipeTutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeTutorialViewController.swift; sourceTree = "<group>"; };
+		4C74EC971E944FA200B419C9 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		4C74EC991E944FB300B419C9 /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Semibold.ttf"; sourceTree = "<group>"; };
 		6CB445A0D4870C6D9E1E73B9 /* Pods_os.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_os.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		788E468493E8B3B08972DDDF /* Pods-os.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-os.release.xcconfig"; path = "Pods/Target Support Files/Pods-os/Pods-os.release.xcconfig"; sourceTree = "<group>"; };
 		F95D2C9A6D9CB56C4810926C /* Pods-os.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-os.debug.xcconfig"; path = "Pods/Target Support Files/Pods-os/Pods-os.debug.xcconfig"; sourceTree = "<group>"; };
@@ -75,15 +81,42 @@
 			isa = PBXGroup;
 			children = (
 				4C5D157A1E8FD76E00D8F15C /* AppDelegate.swift */,
-				4C5D157C1E8FD76E00D8F15C /* MainViewController.swift */,
-				4C5D158C1E8FD7DE00D8F15C /* Extensions.swift */,
-				4C5D158D1E8FD7DE00D8F15C /* WaveformView.swift */,
+				4C74EC9C1E944FCA00B419C9 /* Resources */,
+				4C74EC9B1E944FC200B419C9 /* View Controllers */,
+				4C74EC9D1E944FEF00B419C9 /* Source */,
 				4C5D157E1E8FD76E00D8F15C /* Main.storyboard */,
 				4C5D15811E8FD76E00D8F15C /* Assets.xcassets */,
 				4C5D15831E8FD76E00D8F15C /* LaunchScreen.storyboard */,
 				4C5D15861E8FD76E00D8F15C /* Info.plist */,
 			);
 			path = os;
+			sourceTree = "<group>";
+		};
+		4C74EC9B1E944FC200B419C9 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4C5D157C1E8FD76E00D8F15C /* MainViewController.swift */,
+				4C74EC951E944D5000B419C9 /* SwipeTutorialViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		4C74EC9C1E944FCA00B419C9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4C74EC971E944FA200B419C9 /* Lato-Regular.ttf */,
+				4C74EC991E944FB300B419C9 /* Lato-Semibold.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		4C74EC9D1E944FEF00B419C9 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				4C5D158C1E8FD7DE00D8F15C /* Extensions.swift */,
+				4C5D158D1E8FD7DE00D8F15C /* WaveformView.swift */,
+			);
+			name = Source;
 			sourceTree = "<group>";
 		};
 		9C53FBFA9CEE702C8708E263 /* Frameworks */ = {
@@ -158,9 +191,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C74EC9A1E944FB300B419C9 /* Lato-Semibold.ttf in Resources */,
 				4C5D15851E8FD76E00D8F15C /* LaunchScreen.storyboard in Resources */,
 				4C5D15821E8FD76E00D8F15C /* Assets.xcassets in Resources */,
 				4C5D15801E8FD76E00D8F15C /* Main.storyboard in Resources */,
+				4C74EC981E944FA200B419C9 /* Lato-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C5D157D1E8FD76E00D8F15C /* MainViewController.swift in Sources */,
+				4C74EC961E944D5000B419C9 /* SwipeTutorialViewController.swift in Sources */,
 				4C5D158E1E8FD7DE00D8F15C /* Extensions.swift in Sources */,
 				4C5D157B1E8FD76E00D8F15C /* AppDelegate.swift in Sources */,
 				4C5D158F1E8FD7DE00D8F15C /* WaveformView.swift in Sources */,

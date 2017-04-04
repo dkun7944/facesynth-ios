@@ -1,14 +1,26 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+        </array>
+        <array key="Lato-Semibold.ttf">
+            <string>Lato-Semibold</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="os" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +28,99 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="14S-hN-DsP" kind="presentation" identifier="mainToSwipeTutorial" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="XA8-MR-u8y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--Swipe Tutorial View Controller-->
+        <scene sceneID="6PJ-Lh-yHE">
+            <objects>
+                <viewController storyboardIdentifier="swipeTutorial" modalPresentationStyle="overCurrentContext" id="14S-hN-DsP" customClass="SwipeTutorialViewController" customModule="os" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iUH-pC-emG"/>
+                        <viewControllerLayoutGuide type="bottom" id="rFW-Io-BDQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vtn-z0-ofE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PeP-67-Q4t">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.10000000000000001" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to make sounds" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1r-so-VLe">
+                                <rect key="frame" x="40" y="434" width="295" height="27"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe_hand" translatesAutoresizingMaskIntoConstraints="NO" id="7GC-ew-o1O">
+                                <rect key="frame" x="147.5" y="250.5" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="QLy-5B-EIB"/>
+                                    <constraint firstAttribute="width" constant="80" id="eN9-Xq-of6"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBz-wZ-RIn">
+                                <rect key="frame" x="67.5" y="541" width="240" height="46"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="RWz-Id-TNp"/>
+                                    <constraint firstAttribute="height" constant="46" id="hnp-e6-y5e"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Lato-Semibold" family="Lato" pointSize="21"/>
+                                <state key="normal" title="Got it">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="gotItPressed:" destination="14S-hN-DsP" eventType="touchUpInside" id="uhX-Fg-1UE"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rFW-Io-BDQ" firstAttribute="top" secondItem="hBz-wZ-RIn" secondAttribute="bottom" constant="80" id="4ZW-xY-Q7v"/>
+                            <constraint firstItem="7GC-ew-o1O" firstAttribute="top" secondItem="vtn-z0-ofE" secondAttribute="top" constant="250.5" id="DSt-CP-gre"/>
+                            <constraint firstAttribute="trailing" secondItem="J1r-so-VLe" secondAttribute="trailing" constant="40" id="GSe-He-YFZ"/>
+                            <constraint firstAttribute="trailing" secondItem="PeP-67-Q4t" secondAttribute="trailing" id="JdT-ED-7S4"/>
+                            <constraint firstItem="7GC-ew-o1O" firstAttribute="centerX" secondItem="vtn-z0-ofE" secondAttribute="centerX" id="R1Y-Pm-KDm"/>
+                            <constraint firstItem="PeP-67-Q4t" firstAttribute="leading" secondItem="vtn-z0-ofE" secondAttribute="leading" id="RR1-RN-B0g"/>
+                            <constraint firstItem="J1r-so-VLe" firstAttribute="leading" secondItem="vtn-z0-ofE" secondAttribute="leading" constant="40" id="TQh-OR-9m1"/>
+                            <constraint firstItem="hBz-wZ-RIn" firstAttribute="centerX" secondItem="vtn-z0-ofE" secondAttribute="centerX" id="aJD-ns-Pdx"/>
+                            <constraint firstItem="PeP-67-Q4t" firstAttribute="top" secondItem="iUH-pC-emG" secondAttribute="bottom" id="shE-Dn-KMl"/>
+                            <constraint firstAttribute="bottom" secondItem="PeP-67-Q4t" secondAttribute="bottom" id="tjn-CP-b4n"/>
+                            <constraint firstItem="J1r-so-VLe" firstAttribute="centerX" secondItem="vtn-z0-ofE" secondAttribute="centerX" id="uQV-yo-wXo"/>
+                            <constraint firstItem="hBz-wZ-RIn" firstAttribute="top" secondItem="J1r-so-VLe" secondAttribute="bottom" constant="80" id="y0q-hw-b1N"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="hand" destination="7GC-ew-o1O" id="OB4-9P-D0G"/>
+                        <outlet property="handTopConstraint" destination="DSt-CP-gre" id="6bK-oH-Kx3"/>
+                        <outlet property="swipeLabel" destination="J1r-so-VLe" id="uP1-pf-iBd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S0w-4w-aMO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1036" y="38"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="swipe_hand" width="80" height="80"/>
+    </resources>
 </document>
