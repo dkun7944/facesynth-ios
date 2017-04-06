@@ -62,9 +62,15 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         tapGR.delegate = self
         view.addGestureRecognizer(tapGR)
         
-        let forceGR = ForceTouchGestureRecognizer(target: self, action: #selector(viewForceTouched(_:)))
-        forceGR.delegate = self
-        view.addGestureRecognizer(forceGR)
+        if is3DTouchAvailable() {
+            let forceGR = ForceTouchGestureRecognizer(target: self, action: #selector(viewForceTouched(_:)))
+            forceGR.delegate = self
+            view.addGestureRecognizer(forceGR)
+        }
+    }
+    
+    func is3DTouchAvailable() -> Bool {
+        return self.traitCollection.forceTouchCapability == .available
     }
     
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {

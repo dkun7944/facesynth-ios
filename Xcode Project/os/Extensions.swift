@@ -21,7 +21,7 @@ import UIKit.UIGestureRecognizerSubclass
 @available(iOS 9.0, *)
 public class ForceTouchGestureRecognizer: UIGestureRecognizer {
     //Because we don't know what the maximum force will always be for a UITouch, the force property here will be normalized to a value between 0.0 and 1.0.
-    public private(set) var force: CGFloat = 0.0
+    public private(set) var force: CGFloat = 0.5
     public var maximumForce: CGFloat = 10.0
     
     convenience init() {
@@ -71,7 +71,7 @@ public class ForceTouchGestureRecognizer: UIGestureRecognizer {
     //This function is called automatically by UIGestureRecognizer when our state is set to .Ended. We want to use this function to reset our internal state.
     public override func reset() {
         super.reset()
-        force = 0.0
+        force = 0.5
     }
 }
 
