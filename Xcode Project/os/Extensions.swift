@@ -83,8 +83,8 @@ public extension UIColor {
         let total = intensity1 + intensity2
         let l1 = intensity1/total
         let l2 = intensity2/total
-        guard l1 > 0 else { return color2}
-        guard l2 > 0 else { return color1}
+        guard l1 > 0 else { return color2 }
+        guard l2 > 0 else { return color1 }
         var (r1, g1, b1, a1): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
         var (r2, g2, b2, a2): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
         

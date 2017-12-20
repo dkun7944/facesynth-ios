@@ -7,22 +7,37 @@
 //
 
 import UIKit
+import ARKit
+import SceneKit
 import AudioKit
 
 public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
+    
+    // MARK: - Outlets
+    
+    @IBOutlet weak var label1: UILabel!
+    @IBOutlet weak var label2: UILabel!
     
     // MARK: - Properties
     
     var waveform: WaveformView!
     var waveformIdle: Bool = true
     var oscillator: AKFMOscillator = AKFMOscillator()
-    
     var startingFrequency: Double = 220
+    
+    var sceneView: ARSCNView!
+    let contentUpdater = VirtualContentUpdater()
+    
+    /// Convenience accessor for the session owned by ARSCNView.
+    var session: ARSession {
+        return sceneView.session
+    }
     
     // MARK: - Setup
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        setupSceneView()
         setupOscillator()
         setupGestureRecognizers()
     }
@@ -37,6 +52,24 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         
         if !UserDefaults.standard.hasSeenTutorial() {
             performSegue(withIdentifier: "mainToSwipeTutorial", sender: nil)
+        }
+        
+        /*
+         AR experiences typically involve moving the device without
+         touch input for some time, so prevent auto screen dimming.
+         */
+        UIApplication.shared.isIdleTimerDisabled = true
+        
+        resetTracking()
+    }
+    
+    func setupSceneView() {
+        sceneView = ARSCNView()
+        sceneView.delegate = contentUpdater
+        sceneView.automaticallyUpdatesLighting = true
+        
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { (timer) in
+            self.updateLabels()
         }
     }
     
@@ -80,12 +113,28 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     func addWaveform() {
         waveform = WaveformView(frame: view.frame)
         view.addSubview(waveform)
-        view.backgroundColor = .black
+        view.backgroundColor = .clear
+        view.sendSubview(toBack: waveform)
+    }
+    
+    func updateLabels() {
+        label1.text = "\(contentUpdater.mouthClose)"
+        label2.text = "\(contentUpdater.brows)"
+    }
+    
+    /// - Tag: ARFaceTrackingSetup
+    func resetTracking() {
+        print("Starting ARFaceTracking session")
+        
+        guard ARFaceTrackingConfiguration.isSupported else { return }
+        let configuration = ARFaceTrackingConfiguration()
+        configuration.isLightEstimationEnabled = true
+        session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
     }
     
     // MARK: - Pan Gesture Handler
     
-    func viewTouched(_ gestureRecognizer: UILongPressGestureRecognizer) {
+    @objc func viewTouched(_ gestureRecognizer: UILongPressGestureRecognizer) {
         switch gestureRecognizer.state {
         case .began:
             self.beganPanning(gestureRecognizer)
@@ -96,7 +145,7 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    func viewPanned(_ gestureRecognizer: UIPanGestureRecognizer) {
+    @objc func viewPanned(_ gestureRecognizer: UIPanGestureRecognizer) {
         DispatchQueue.global(qos: .background).async {
             if gestureRecognizer.state == .changed {
                 self.continuedPanning(gestureRecognizer)
@@ -104,7 +153,7 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    func viewForceTouched(_ gestureRecognizer: ForceTouchGestureRecognizer) {
+    @objc func viewForceTouched(_ gestureRecognizer: ForceTouchGestureRecognizer) {
         DispatchQueue.global(qos: .background).async {
             self.oscillator.carrierMultiplier = Double(gestureRecognizer.force * 3) + 1
             self.updateWaveform()

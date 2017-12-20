@@ -122,7 +122,7 @@ public class WaveformView: UIView {
     
     // MARK: - Animation
     
-    func updateDisplayLink() {
+    @objc func updateDisplayLink() {
         updatePhaseShift()
         updateStartStopNote()
         updateFrequency()
