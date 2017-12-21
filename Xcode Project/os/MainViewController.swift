@@ -11,12 +11,13 @@ import ARKit
 import SceneKit
 import AudioKit
 
-public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
+public class MainViewController: UIViewController, UIGestureRecognizerDelegate, VirtualContentUpdaterDelegate {
     
     // MARK: - Outlets
     
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var label2: UILabel!
+    @IBOutlet weak var sceneView: ARSCNView!
     
     // MARK: - Properties
     
@@ -25,9 +26,10 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     var oscillator: AKFMOscillator = AKFMOscillator()
     var startingFrequency: Double = 220
     
-    var sceneView: ARSCNView!
-    let contentUpdater = VirtualContentUpdater()
+    let freqRange: ClosedRange<Double> = 110.0...1760.0
+    let modRange: ClosedRange<Double> = -30.0...30.0
     
+    let contentUpdater = VirtualContentUpdater()
     /// Convenience accessor for the session owned by ARSCNView.
     var session: ARSession {
         return sceneView.session
@@ -64,13 +66,9 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func setupSceneView() {
-        sceneView = ARSCNView()
         sceneView.delegate = contentUpdater
         sceneView.automaticallyUpdatesLighting = true
-        
-        let timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { (timer) in
-            self.updateLabels()
-        }
+        contentUpdater.delegate = self
     }
     
     func setupOscillator() {
@@ -117,12 +115,7 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         view.sendSubview(toBack: waveform)
     }
     
-    func updateLabels() {
-        label1.text = "\(contentUpdater.mouthClose)"
-        label2.text = "\(contentUpdater.brows)"
-    }
-    
-    /// - Tag: ARFaceTrackingSetup
+    // MARK: -  ARFaceTrackingSetup
     func resetTracking() {
         print("Starting ARFaceTracking session")
         
@@ -130,6 +123,27 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         let configuration = ARFaceTrackingConfiguration()
         configuration.isLightEstimationEnabled = true
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+    }
+    
+    // MARK: - VirtualContentUpdaterDelegate
+    
+    func blendShapesUpdated(_ jawOpen: Float, _ brows: Float) {
+        label1.text = "\(jawOpen)"
+        label2.text = "\(brows)"
+        
+        updateOscillatorFrequency(withBrows: brows)
+        updateOscillatorModulation(withJaw: jawOpen)
+        updateWaveform()
+        
+        if jawOpen >= 0.05 && !oscillator.isPlaying {
+            oscillator.play()
+            waveform.startNote()
+            waveformIdle = false
+        } else if jawOpen <= 0.05 && oscillator.isPlaying {
+            oscillator.stop()
+            waveform.stopNote()
+            waveformIdle = true
+        }
     }
     
     // MARK: - Pan Gesture Handler
@@ -166,7 +180,7 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         oscillator.play()
         
         oscillator.rampTime = 0
-        updateOscillatorModulation(gestureRecognizer.location(in: view))
+        updateOscillatorModulation(withLocation: gestureRecognizer.location(in: view))
         oscillator.rampTime = 0.2
         
         DispatchQueue.main.async {
@@ -209,20 +223,30 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         let location = gestureRecognizer.location(in: view)
         let translation = gestureRecognizer.translation(in: view)
         
-        updateOscillatorModulation(location)
-        updateOscillatorFrequency(translation)
+        updateOscillatorModulation(withLocation: location)
+        updateOscillatorFrequency(withTranslation: translation)
     }
     
-    func updateOscillatorModulation(_ location: CGPoint) {
+    func updateOscillatorModulation(withLocation location: CGPoint) {
         let modulation = Double(location.x * 0.16) - 30
-        let newModulation = modulation.clamped(to: -30...30)
+        let newModulation = modulation.clamped(to: modRange)
         self.oscillator.modulationIndex = newModulation
     }
     
-    func updateOscillatorFrequency(_ translation: CGPoint) {
+    func updateOscillatorFrequency(withTranslation translation: CGPoint) {
         let changeInFrequency = Double(-translation.y * 1.5)
-        let newFrequency = (self.startingFrequency + changeInFrequency).clamped(to: 110...1760)
+        let newFrequency = (self.startingFrequency + changeInFrequency).clamped(to: freqRange)
         oscillator.baseFrequency = newFrequency
+    }
+    
+    func updateOscillatorFrequency(withBrows brows: Float) {
+        let frequency = (Double(brows) * (freqRange.upperBound - freqRange.lowerBound)) + freqRange.lowerBound
+        oscillator.baseFrequency = frequency
+    }
+    
+    func updateOscillatorModulation(withJaw jaw: Float) {
+        let mod = (Double(jaw) * (modRange.upperBound - modRange.lowerBound)) + modRange.lowerBound
+        oscillator.modulationIndex = mod
     }
     
     // MARK: - Status Bar

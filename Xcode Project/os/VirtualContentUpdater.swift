@@ -8,20 +8,27 @@ An `ARSCNViewDelegate` which addes and updates the virtual face content in respo
 import SceneKit
 import ARKit
 
+protocol VirtualContentUpdaterDelegate {
+    func blendShapesUpdated(_ jawOpen: Float, _ brows: Float)
+}
+
 class VirtualContentUpdater: NSObject, ARSCNViewDelegate {
     
     // MARK: - Blend Shapes
     
-    var mouthClose: Float = 0.5
+    var jawOpen: Float = 0.5
     var brows: Float = 0.5
     
     /// - Tag: BlendShapeAnimation
     var blendShapes: [ARFaceAnchor.BlendShapeLocation: Any] = [:] {
         didSet {
-            mouthClose = blendShapes[.mouthClose] as? Float ?? mouthClose
+            jawOpen = blendShapes[.jawOpen] as? Float ?? jawOpen
             brows = blendShapes[.browInnerUp] as? Float ?? brows
+            delegate?.blendShapesUpdated(jawOpen, brows)
         }
     }
+    
+    var delegate: VirtualContentUpdaterDelegate?
     
     /**
      A reference to the node that was added by ARKit in `renderer(_:didAdd:for:)`.

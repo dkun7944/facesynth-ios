@@ -28,22 +28,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QlE-Wc-H1k">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QlE-Wc-H1k">
                                 <rect key="frame" x="166" y="443" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTJ-E5-Qtu">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTJ-E5-Qtu">
                                 <rect key="frame" x="166" y="494" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dnc-T3-cKX" customClass="ARSCNView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="QlE-Wc-H1k" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EeK-93-FSg"/>
+                            <constraint firstAttribute="trailing" secondItem="dnc-T3-cKX" secondAttribute="trailing" id="NAX-X0-Otm"/>
+                            <constraint firstItem="dnc-T3-cKX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Tts-Xe-7sN"/>
+                            <constraint firstAttribute="bottom" secondItem="dnc-T3-cKX" secondAttribute="bottom" id="YYp-U9-e9z"/>
+                            <constraint firstItem="dnc-T3-cKX" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="bKB-s4-R97"/>
                             <constraint firstItem="RTJ-E5-Qtu" firstAttribute="top" secondItem="QlE-Wc-H1k" secondAttribute="bottom" constant="30" id="cZC-0D-4aw"/>
                             <constraint firstItem="QlE-Wc-H1k" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="120" id="dIG-iG-jj7"/>
                             <constraint firstItem="RTJ-E5-Qtu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="s4Y-XX-sWJ"/>
@@ -52,12 +60,13 @@
                     <connections>
                         <outlet property="label1" destination="QlE-Wc-H1k" id="AlA-mY-td6"/>
                         <outlet property="label2" destination="RTJ-E5-Qtu" id="eln-lB-hUv"/>
+                        <outlet property="sceneView" destination="dnc-T3-cKX" id="Vjd-0U-Cwv"/>
                         <segue destination="14S-hN-DsP" kind="presentation" identifier="mainToSwipeTutorial" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="XA8-MR-u8y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="146" y="-18"/>
+            <point key="canvasLocation" x="144.80000000000001" y="-18.440779610194905"/>
         </scene>
         <!--Swipe Tutorial View Controller-->
         <scene sceneID="6PJ-Lh-yHE">
