@@ -4,14 +4,14 @@ public class WaveformView: UIView {
     
     // MARK: - Properties
     
-    public var rampTime: TimeInterval = 0.2 {
+    public var rampTime: TimeInterval = 0.4 {
         didSet {
             rampFrames = 60 * CGFloat(rampTime)
         }
     }
     
     public var waveColor: UIColor = .lightGray
-    public var idleAmplitude: CGFloat = 0.05
+    public var idleAmplitude: CGFloat = 0.03
     public var idleFrequency: CGFloat = 1.5
     public var idlePhaseShift: CGFloat = 0.05
     
@@ -189,17 +189,17 @@ public class WaveformView: UIView {
         currentPhaseShift = max(phaseShift, idlePhaseShift)
 
         phase -= currentPhaseShift
-        setNeedsDisplay()
+        
+        let mid = bounds.height / 2
+        let maxAmplitude: CGFloat = mid - 4
+        let halfHeight = maxAmplitude * currentAmplitude
+        let rect = CGRect(x: 0, y: mid - halfHeight, width: bounds.width, height: halfHeight * 2)
+        
+        setNeedsDisplay(rect)
     }
     
     override public func draw(_ rect: CGRect) {
-        var context = UIGraphicsGetCurrentContext()
-        context?.clear(bounds)
-        
-        backgroundColor?.set()
-        context?.fill(bounds)
-        
-        context = UIGraphicsGetCurrentContext()
+        let context = UIGraphicsGetCurrentContext()
         context?.setLineWidth(2.0)
         
         let halfHeight = bounds.height / 2

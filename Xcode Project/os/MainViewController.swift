@@ -61,7 +61,7 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate, 
             }
         }
         
-        if !ARFaceTrackingConfiguration.isSupported {
+        if ARFaceTrackingConfiguration.isSupported {
             /*
              AR experiences typically involve moving the device without
              touch input for some time, so prevent auto screen dimming.

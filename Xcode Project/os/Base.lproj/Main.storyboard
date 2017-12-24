@@ -41,16 +41,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dnc-T3-cKX" customClass="ARSCNView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="XuQ-Gt-SJf"/>
+                                    <constraint firstAttribute="width" constant="20" id="gKx-09-c6q"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="QlE-Wc-H1k" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EeK-93-FSg"/>
-                            <constraint firstAttribute="trailing" secondItem="dnc-T3-cKX" secondAttribute="trailing" id="NAX-X0-Otm"/>
                             <constraint firstItem="dnc-T3-cKX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Tts-Xe-7sN"/>
-                            <constraint firstAttribute="bottom" secondItem="dnc-T3-cKX" secondAttribute="bottom" id="YYp-U9-e9z"/>
                             <constraint firstItem="dnc-T3-cKX" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="bKB-s4-R97"/>
                             <constraint firstItem="RTJ-E5-Qtu" firstAttribute="top" secondItem="QlE-Wc-H1k" secondAttribute="bottom" constant="30" id="cZC-0D-4aw"/>
                             <constraint firstItem="QlE-Wc-H1k" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="120" id="dIG-iG-jj7"/>
