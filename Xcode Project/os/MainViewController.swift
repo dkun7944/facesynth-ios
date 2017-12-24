@@ -28,6 +28,7 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate, 
     
     let freqRange: ClosedRange<Double> = 110.0...1760.0
     let modRange: ClosedRange<Double> = -30.0...30.0
+    let carrierRange: ClosedRange<Double> = 1.0...4.0
     
     let contentUpdater = VirtualContentUpdater()
     /// Convenience accessor for the session owned by ARSCNView.
@@ -53,16 +54,22 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate, 
         super.viewDidAppear(animated)
         
         if !UserDefaults.standard.hasSeenTutorial() {
-            performSegue(withIdentifier: "mainToSwipeTutorial", sender: nil)
+            if ARFaceTrackingConfiguration.isSupported {
+                performSegue(withIdentifier: "mainToFaceTutorial", sender: nil)
+            } else {
+                performSegue(withIdentifier: "mainToSwipeTutorial", sender: nil)
+            }
         }
         
-        /*
-         AR experiences typically involve moving the device without
-         touch input for some time, so prevent auto screen dimming.
-         */
-        UIApplication.shared.isIdleTimerDisabled = true
-        
-        resetTracking()
+        if !ARFaceTrackingConfiguration.isSupported {
+            /*
+             AR experiences typically involve moving the device without
+             touch input for some time, so prevent auto screen dimming.
+             */
+            UIApplication.shared.isIdleTimerDisabled = true
+            resetTracking()
+            view.isUserInteractionEnabled = false
+        }
     }
     
     func setupSceneView() {
@@ -116,6 +123,7 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate, 
     }
     
     // MARK: -  ARFaceTrackingSetup
+    
     func resetTracking() {
         print("Starting ARFaceTracking session")
         
@@ -127,12 +135,12 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate, 
     
     // MARK: - VirtualContentUpdaterDelegate
     
-    func blendShapesUpdated(_ jawOpen: Float, _ brows: Float) {
-        label1.text = "\(jawOpen)"
-        label2.text = "\(brows)"
+    func blendShapesUpdated(_ jawOpen: Float, _ brows: Float, _ pucker: Float) {
+        guard presentedViewController == nil else { return }
         
         updateOscillatorFrequency(withBrows: brows)
         updateOscillatorModulation(withJaw: jawOpen)
+        updateOscillatorCarrier(withPucker: pucker)
         updateWaveform()
         
         if jawOpen >= 0.05 && !oscillator.isPlaying {
@@ -247,6 +255,11 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate, 
     func updateOscillatorModulation(withJaw jaw: Float) {
         let mod = (Double(jaw) * (modRange.upperBound - modRange.lowerBound)) + modRange.lowerBound
         oscillator.modulationIndex = mod
+    }
+    
+    func updateOscillatorCarrier(withPucker pucker: Float) {
+        let carrier = (Double(pucker) * (carrierRange.upperBound - carrierRange.lowerBound)) + carrierRange.lowerBound
+        oscillator.carrierMultiplier = carrier
     }
     
     // MARK: - Status Bar

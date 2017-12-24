@@ -9,7 +9,7 @@ import SceneKit
 import ARKit
 
 protocol VirtualContentUpdaterDelegate {
-    func blendShapesUpdated(_ jawOpen: Float, _ brows: Float)
+    func blendShapesUpdated(_ jawOpen: Float, _ brows: Float, _ pucker: Float)
 }
 
 class VirtualContentUpdater: NSObject, ARSCNViewDelegate {
@@ -18,13 +18,17 @@ class VirtualContentUpdater: NSObject, ARSCNViewDelegate {
     
     var jawOpen: Float = 0.5
     var brows: Float = 0.5
+    var pucker: Float  = 0.5
     
     /// - Tag: BlendShapeAnimation
-    var blendShapes: [ARFaceAnchor.BlendShapeLocation: Any] = [:] {
+    var blendShapes: [ARFaceAnchor.BlendShapeLocation : Any] = [:] {
         didSet {
             jawOpen = blendShapes[.jawOpen] as? Float ?? jawOpen
             brows = blendShapes[.browInnerUp] as? Float ?? brows
-            delegate?.blendShapesUpdated(jawOpen, brows)
+            if let p = blendShapes[.mouthPucker] as? Float {
+                pucker = (0.8-(2*p)).clamped(to: 0...1)
+            }
+            delegate?.blendShapesUpdated(jawOpen, brows, pucker)
         }
     }
     
@@ -52,7 +56,13 @@ class VirtualContentUpdater: NSObject, ARSCNViewDelegate {
         guard let faceAnchor = anchor as? ARFaceAnchor else { return }
         
         DispatchQueue.main.async {
-            self.blendShapes = faceAnchor.blendShapes
+            if faceAnchor.isTracked {
+                self.blendShapes = faceAnchor.blendShapes
+            } else {
+                self.blendShapes = [.jawOpen : Float(0.01),
+                                    .browInnerUp : self.brows,
+                                    .mouthPucker : self.pucker]
+            }
         }
     }
 }

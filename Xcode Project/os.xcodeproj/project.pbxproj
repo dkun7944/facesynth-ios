@@ -20,6 +20,7 @@
 		4C74EC981E944FA200B419C9 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C74EC971E944FA200B419C9 /* Lato-Regular.ttf */; };
 		4C74EC9A1E944FB300B419C9 /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C74EC991E944FB300B419C9 /* Lato-Semibold.ttf */; };
 		4C74EC9F1E945BDA00B419C9 /* UserDefaults+osUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74EC9E1E945BDA00B419C9 /* UserDefaults+osUserDefaults.swift */; };
+		4CED9E5D1FF0294A009CEF41 /* FaceTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CED9E5C1FF0294A009CEF41 /* FaceTutorialViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		4C74EC971E944FA200B419C9 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		4C74EC991E944FB300B419C9 /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Semibold.ttf"; sourceTree = "<group>"; };
 		4C74EC9E1E945BDA00B419C9 /* UserDefaults+osUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+osUserDefaults.swift"; sourceTree = "<group>"; };
+		4CED9E5C1FF0294A009CEF41 /* FaceTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTutorialViewController.swift; sourceTree = "<group>"; };
 		6CB445A0D4870C6D9E1E73B9 /* Pods_os.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_os.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		788E468493E8B3B08972DDDF /* Pods-os.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-os.release.xcconfig"; path = "Pods/Target Support Files/Pods-os/Pods-os.release.xcconfig"; sourceTree = "<group>"; };
 		F95D2C9A6D9CB56C4810926C /* Pods-os.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-os.debug.xcconfig"; path = "Pods/Target Support Files/Pods-os/Pods-os.debug.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				4C5D157C1E8FD76E00D8F15C /* MainViewController.swift */,
 				4C74EC951E944D5000B419C9 /* SwipeTutorialViewController.swift */,
+				4CED9E5C1FF0294A009CEF41 /* FaceTutorialViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			files = (
 				4C5D157D1E8FD76E00D8F15C /* MainViewController.swift in Sources */,
 				4C581C5B1FEA042100755290 /* VirtualContentUpdater.swift in Sources */,
+				4CED9E5D1FF0294A009CEF41 /* FaceTutorialViewController.swift in Sources */,
 				4C74EC9F1E945BDA00B419C9 /* UserDefaults+osUserDefaults.swift in Sources */,
 				4C74EC961E944D5000B419C9 /* SwipeTutorialViewController.swift in Sources */,
 				4C5D158E1E8FD7DE00D8F15C /* Extensions.swift in Sources */,
