@@ -10,13 +10,14 @@ public class WaveformView: UIView {
         }
     }
     
-    public var waveColor: UIColor = .lightGray
+    public var waveColor: UIColor = .pastelBlue
     public var idleAmplitude: CGFloat = 0.03
     public var idleFrequency: CGFloat = 1.5
     public var idlePhaseShift: CGFloat = 0.05
     
     var density: CGFloat = 1
     var phase: CGFloat = 0
+    var phase2: CGFloat = 0
     var rampFrames: CGFloat!
     
     var updatingFrequency: Bool = false
@@ -65,7 +66,7 @@ public class WaveformView: UIView {
         setNewAmplitude(idleAmplitude)
         setNewFrequency(idleFrequency)
         setNewPhaseShift(idlePhaseShift)
-        waveColor = .lightGray
+        waveColor = .pastelBlue
     }
     
     public func update(withRealFrequency frequency: CGFloat, modulation: CGFloat, carrier: CGFloat) {
@@ -189,6 +190,7 @@ public class WaveformView: UIView {
         currentPhaseShift = max(phaseShift, idlePhaseShift)
 
         phase -= currentPhaseShift
+        phase2 -= currentPhaseShift * 0.5
         
         let mid = bounds.height / 2
         let maxAmplitude: CGFloat = mid - 4
@@ -232,6 +234,33 @@ public class WaveformView: UIView {
         context?.closePath()
 
         context?.setFillColor(waveColor.cgColor)
+        context?.fillPath(using: .winding)
+        
+        // ----------------
+        
+        for x in stride(from: 0, to: width + density, by: density) {
+            let scaling: CGFloat = -pow(1 / mid * (x - mid), 2) + 1
+            let y: CGFloat = 0.6 * scaling * maxAmplitude * currentAmplitude * cos(2 * .pi * (x / width) * currentFrequency - phase2) + halfHeight
+            
+            let point: CGPoint = CGPoint(x: x, y: y)
+            if x == 0 {
+                context?.move(to: point)
+            } else {
+                context?.addLine(to: point)
+            }
+        }
+        
+        for x in stride(from: width + density, to: 0, by: -density) {
+            let scaling: CGFloat = -pow(1 / mid * (x - mid), 2) + 1
+            let y: CGFloat = 0.6 * scaling * maxAmplitude * currentAmplitude * cos(2 * .pi * (x / width) * currentFrequency - phase2 - .pi) + halfHeight
+            
+            let point: CGPoint = CGPoint(x: x, y: y)
+            context?.addLine(to: point)
+        }
+        
+        context?.closePath()
+        
+        context?.setFillColor(waveColor.lighten(byUnits: 0.2).cgColor)
         context?.fillPath(using: .winding)
     }
 }

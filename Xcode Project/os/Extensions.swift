@@ -93,4 +93,10 @@ public extension UIColor {
         
         return UIColor(red: l1*r1 + l2*r2, green: l1*g1 + l2*g2, blue: l1*b1 + l2*b2, alpha: l1*a1 + l2*a2)
     }
+    
+    func lighten(byUnits units: CGFloat) -> UIColor {
+        var (r, g, b, a): (CGFloat, CGFloat, CGFloat, CGFloat) = (0, 0, 0, 0)
+        self.getRed(&r, green: &g, blue: &b, alpha: &a)
+        return UIColor(red: r+units, green: g+units, blue: b+units, alpha: a)
+    }
 }

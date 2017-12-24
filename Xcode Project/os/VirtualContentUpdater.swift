@@ -16,7 +16,7 @@ class VirtualContentUpdater: NSObject, ARSCNViewDelegate {
     
     // MARK: - Blend Shapes
     
-    var jawOpen: Float = 0.5
+    var jawOpen: Float = 0.01
     var brows: Float = 0.5
     var pucker: Float  = 0.5
     
@@ -50,7 +50,7 @@ class VirtualContentUpdater: NSObject, ARSCNViewDelegate {
             self.faceNode = node
         }
     }
-    2
+    
     /// - Tag: ARFaceGeometryUpdate
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         guard let faceAnchor = anchor as? ARFaceAnchor else { return }
