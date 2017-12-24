@@ -11,7 +11,7 @@ public class WaveformView: UIView {
     }
     
     public var waveColor: UIColor = .lightGray
-    public var idleAmplitude: CGFloat = 0.01
+    public var idleAmplitude: CGFloat = 0.05
     public var idleFrequency: CGFloat = 1.5
     public var idlePhaseShift: CGFloat = 0.05
     
@@ -221,6 +221,17 @@ public class WaveformView: UIView {
             }
         }
         
-        context?.strokePath()
+        for x in stride(from: width + density, to: 0, by: -density) {
+            let scaling: CGFloat = -pow(1 / mid * (x - mid), 2) + 1
+            let y: CGFloat = scaling * maxAmplitude * currentAmplitude * sin(2 * .pi * (x / width) * currentFrequency + phase - .pi) + halfHeight
+
+            let point: CGPoint = CGPoint(x: x, y: y)
+            context?.addLine(to: point)
+        }
+        
+        context?.closePath()
+
+        context?.setFillColor(waveColor.cgColor)
+        context?.fillPath(using: .winding)
     }
 }
