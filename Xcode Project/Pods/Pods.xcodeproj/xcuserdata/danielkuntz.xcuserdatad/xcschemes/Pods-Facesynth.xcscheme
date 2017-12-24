@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "727DAEAE3A974D2A1C2D83F8EEEBCC2E"
-               BuildableName = "Pods_os.framework"
-               BlueprintName = "Pods-os"
+               BlueprintIdentifier = "2F0B9ADD6C2196311A6A521DA65CB486"
+               BuildableName = "Pods_Facesynth.framework"
+               BlueprintName = "Pods-Facesynth"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,9 +47,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "727DAEAE3A974D2A1C2D83F8EEEBCC2E"
-            BuildableName = "Pods_os.framework"
-            BlueprintName = "Pods-os"
+            BlueprintIdentifier = "2F0B9ADD6C2196311A6A521DA65CB486"
+            BuildableName = "Pods_Facesynth.framework"
+            BlueprintName = "Pods-Facesynth"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -1,6 +1,6 @@
 //
 //  FaceTutorialViewController.swift
-//  os
+//  Facesynth
 //
 //  Created by Daniel Kuntz on 12/24/17.
 //  Copyright © 2017 Daniel Kuntz. All rights reserved.

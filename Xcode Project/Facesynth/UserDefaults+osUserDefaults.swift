@@ -1,6 +1,6 @@
 //
 //  UserDefaults+osUserDefaults.swift
-//  os
+//  Facesynth
 //
 //  Created by Daniel Kuntz on 4/4/17.
 //  Copyright © 2017 Daniel Kuntz. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  MainViewController.swift
-//  os
+//  Facesynth
 //
 //  Created by Daniel Kuntz on 4/1/17.
 //  Copyright © 2017 Daniel Kuntz. All rights reserved.

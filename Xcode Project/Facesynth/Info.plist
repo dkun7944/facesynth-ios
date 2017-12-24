@@ -25,7 +25,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Facesynth uses the camera to see your facial expressions.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Allow os to use the microphone.</string>
+	<string>Allow Facesynth to use the microphone.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

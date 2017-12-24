@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4C5D15761E8FD76E00D8F15C"
-               BuildableName = "os.app"
-               BlueprintName = "os"
-               ReferencedContainer = "container:os.xcodeproj">
+               BuildableName = "Facesynth.app"
+               BlueprintName = "Facesynth"
+               ReferencedContainer = "container:Facesynth.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,9 +34,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4C5D15761E8FD76E00D8F15C"
-            BuildableName = "os.app"
-            BlueprintName = "os"
-            ReferencedContainer = "container:os.xcodeproj">
+            BuildableName = "Facesynth.app"
+            BlueprintName = "Facesynth"
+            ReferencedContainer = "container:Facesynth.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,9 +58,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4C5D15761E8FD76E00D8F15C"
-            BuildableName = "os.app"
-            BlueprintName = "os"
-            ReferencedContainer = "container:os.xcodeproj">
+            BuildableName = "Facesynth.app"
+            BlueprintName = "Facesynth"
+            ReferencedContainer = "container:Facesynth.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4C5D15761E8FD76E00D8F15C"
-            BuildableName = "os.app"
-            BlueprintName = "os"
-            ReferencedContainer = "container:os.xcodeproj">
+            BuildableName = "Facesynth.app"
+            BlueprintName = "Facesynth"
+            ReferencedContainer = "container:Facesynth.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

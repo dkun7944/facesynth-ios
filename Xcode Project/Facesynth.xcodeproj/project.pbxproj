@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2795B70208E44AED9045320D /* Pods_os.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CB445A0D4870C6D9E1E73B9 /* Pods_os.framework */; };
 		4C581C5B1FEA042100755290 /* VirtualContentUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C581C5A1FEA042100755290 /* VirtualContentUpdater.swift */; };
 		4C5D157B1E8FD76E00D8F15C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D157A1E8FD76E00D8F15C /* AppDelegate.swift */; };
 		4C5D157D1E8FD76E00D8F15C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5D157C1E8FD76E00D8F15C /* MainViewController.swift */; };
@@ -21,11 +20,13 @@
 		4C74EC9A1E944FB300B419C9 /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C74EC991E944FB300B419C9 /* Lato-Semibold.ttf */; };
 		4C74EC9F1E945BDA00B419C9 /* UserDefaults+osUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74EC9E1E945BDA00B419C9 /* UserDefaults+osUserDefaults.swift */; };
 		4CED9E5D1FF0294A009CEF41 /* FaceTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CED9E5C1FF0294A009CEF41 /* FaceTutorialViewController.swift */; };
+		FD9D450445869F3A478DF261 /* Pods_Facesynth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 989D8AF946EC00797D392BC4 /* Pods_Facesynth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F35AAA79A447D9C4088969E /* Pods-Facesynth.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Facesynth.release.xcconfig"; path = "Pods/Target Support Files/Pods-Facesynth/Pods-Facesynth.release.xcconfig"; sourceTree = "<group>"; };
 		4C581C5A1FEA042100755290 /* VirtualContentUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualContentUpdater.swift; sourceTree = "<group>"; };
-		4C5D15771E8FD76E00D8F15C /* os.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = os.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C5D15771E8FD76E00D8F15C /* Facesynth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Facesynth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C5D157A1E8FD76E00D8F15C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C5D157C1E8FD76E00D8F15C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4C5D157F1E8FD76E00D8F15C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -39,9 +40,8 @@
 		4C74EC991E944FB300B419C9 /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Semibold.ttf"; sourceTree = "<group>"; };
 		4C74EC9E1E945BDA00B419C9 /* UserDefaults+osUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+osUserDefaults.swift"; sourceTree = "<group>"; };
 		4CED9E5C1FF0294A009CEF41 /* FaceTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTutorialViewController.swift; sourceTree = "<group>"; };
-		6CB445A0D4870C6D9E1E73B9 /* Pods_os.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_os.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		788E468493E8B3B08972DDDF /* Pods-os.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-os.release.xcconfig"; path = "Pods/Target Support Files/Pods-os/Pods-os.release.xcconfig"; sourceTree = "<group>"; };
-		F95D2C9A6D9CB56C4810926C /* Pods-os.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-os.debug.xcconfig"; path = "Pods/Target Support Files/Pods-os/Pods-os.debug.xcconfig"; sourceTree = "<group>"; };
+		5F82455F38C94753F6A4733E /* Pods-Facesynth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Facesynth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Facesynth/Pods-Facesynth.debug.xcconfig"; sourceTree = "<group>"; };
+		989D8AF946EC00797D392BC4 /* Pods_Facesynth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Facesynth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2795B70208E44AED9045320D /* Pods_os.framework in Frameworks */,
+				FD9D450445869F3A478DF261 /* Pods_Facesynth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,8 +59,8 @@
 		0C3969E378705A095457ECB5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F95D2C9A6D9CB56C4810926C /* Pods-os.debug.xcconfig */,
-				788E468493E8B3B08972DDDF /* Pods-os.release.xcconfig */,
+				5F82455F38C94753F6A4733E /* Pods-Facesynth.debug.xcconfig */,
+				1F35AAA79A447D9C4088969E /* Pods-Facesynth.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -68,22 +68,22 @@
 		4C5D156E1E8FD76E00D8F15C = {
 			isa = PBXGroup;
 			children = (
-				4C5D15791E8FD76E00D8F15C /* os */,
+				4C5D15791E8FD76E00D8F15C /* Facesynth */,
 				4C5D15781E8FD76E00D8F15C /* Products */,
 				0C3969E378705A095457ECB5 /* Pods */,
-				9C53FBFA9CEE702C8708E263 /* Frameworks */,
+				558F74FF274A98B1FC32A1FB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		4C5D15781E8FD76E00D8F15C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4C5D15771E8FD76E00D8F15C /* os.app */,
+				4C5D15771E8FD76E00D8F15C /* Facesynth.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4C5D15791E8FD76E00D8F15C /* os */ = {
+		4C5D15791E8FD76E00D8F15C /* Facesynth */ = {
 			isa = PBXGroup;
 			children = (
 				4C5D157A1E8FD76E00D8F15C /* AppDelegate.swift */,
@@ -95,7 +95,7 @@
 				4C5D15831E8FD76E00D8F15C /* LaunchScreen.storyboard */,
 				4C5D15861E8FD76E00D8F15C /* Info.plist */,
 			);
-			path = os;
+			path = Facesynth;
 			sourceTree = "<group>";
 		};
 		4C74EC9B1E944FC200B419C9 /* View Controllers */ = {
@@ -128,10 +128,10 @@
 			name = "Other Stuff";
 			sourceTree = "<group>";
 		};
-		9C53FBFA9CEE702C8708E263 /* Frameworks */ = {
+		558F74FF274A98B1FC32A1FB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6CB445A0D4870C6D9E1E73B9 /* Pods_os.framework */,
+				989D8AF946EC00797D392BC4 /* Pods_Facesynth.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -139,9 +139,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4C5D15761E8FD76E00D8F15C /* os */ = {
+		4C5D15761E8FD76E00D8F15C /* Facesynth */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4C5D15891E8FD76E00D8F15C /* Build configuration list for PBXNativeTarget "os" */;
+			buildConfigurationList = 4C5D15891E8FD76E00D8F15C /* Build configuration list for PBXNativeTarget "Facesynth" */;
 			buildPhases = (
 				3A212064A06260EF337A977D /* [CP] Check Pods Manifest.lock */,
 				4C5D15731E8FD76E00D8F15C /* Sources */,
@@ -155,9 +155,9 @@
 			);
 			dependencies = (
 			);
-			name = os;
+			name = Facesynth;
 			productName = os;
-			productReference = 4C5D15771E8FD76E00D8F15C /* os.app */;
+			productReference = 4C5D15771E8FD76E00D8F15C /* Facesynth.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -178,7 +178,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4C5D15721E8FD76E00D8F15C /* Build configuration list for PBXProject "os" */;
+			buildConfigurationList = 4C5D15721E8FD76E00D8F15C /* Build configuration list for PBXProject "Facesynth" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -191,7 +191,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4C5D15761E8FD76E00D8F15C /* os */,
+				4C5D15761E8FD76E00D8F15C /* Facesynth */,
 			);
 		};
 /* End PBXProject section */
@@ -223,7 +223,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-os-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Facesynth-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -255,7 +255,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-os/Pods-os-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Facesynth/Pods-Facesynth-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C88231B1FE29A98FA303062A /* [CP] Embed Pods Frameworks */ = {
@@ -264,7 +264,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-os/Pods-os-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Facesynth/Pods-Facesynth-frameworks.sh",
 				"${PODS_ROOT}/AudioKit/iOS/AudioKit.framework",
 				"${PODS_ROOT}/AudioKit/iOS/AudioKitUI.framework",
 			);
@@ -275,7 +275,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-os/Pods-os-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Facesynth/Pods-Facesynth-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -425,14 +425,14 @@
 		};
 		4C5D158A1E8FD76E00D8F15C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F95D2C9A6D9CB56C4810926C /* Pods-os.debug.xcconfig */;
+			baseConfigurationReference = 5F82455F38C94753F6A4733E /* Pods-Facesynth.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = M24FQVR7AD;
-				INFOPLIST_FILE = os/Info.plist;
+				INFOPLIST_FILE = Facesynth/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.danielkuntz.os;
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielkuntz.facesynth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -441,14 +441,14 @@
 		};
 		4C5D158B1E8FD76E00D8F15C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 788E468493E8B3B08972DDDF /* Pods-os.release.xcconfig */;
+			baseConfigurationReference = 1F35AAA79A447D9C4088969E /* Pods-Facesynth.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = M24FQVR7AD;
-				INFOPLIST_FILE = os/Info.plist;
+				INFOPLIST_FILE = Facesynth/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.danielkuntz.os;
+				PRODUCT_BUNDLE_IDENTIFIER = com.danielkuntz.facesynth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -458,7 +458,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4C5D15721E8FD76E00D8F15C /* Build configuration list for PBXProject "os" */ = {
+		4C5D15721E8FD76E00D8F15C /* Build configuration list for PBXProject "Facesynth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4C5D15871E8FD76E00D8F15C /* Debug */,
@@ -467,7 +467,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4C5D15891E8FD76E00D8F15C /* Build configuration list for PBXNativeTarget "os" */ = {
+		4C5D15891E8FD76E00D8F15C /* Build configuration list for PBXNativeTarget "Facesynth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4C5D158A1E8FD76E00D8F15C /* Debug */,

@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_osVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_osVersionString[];
+FOUNDATION_EXPORT double Pods_FacesynthVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_FacesynthVersionString[];
 

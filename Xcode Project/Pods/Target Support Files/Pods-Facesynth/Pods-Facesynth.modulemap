@@ -1,0 +1,6 @@
+framework module Pods_Facesynth {
+  umbrella header "Pods-Facesynth-umbrella.h"
+
+  export *
+  module * { export * }
+}
