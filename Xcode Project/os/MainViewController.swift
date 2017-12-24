@@ -143,7 +143,7 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate, 
         updateOscillatorCarrier(withPucker: pucker)
         updateWaveform()
         
-        if jawOpen >= 0.1 && !oscillator.isPlaying {
+        if jawOpen >= 0.2 && !oscillator.isPlaying {
             oscillator.play()
             waveform.startNote()
             waveformIdle = false
