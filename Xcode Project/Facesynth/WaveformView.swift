@@ -189,8 +189,8 @@ public class WaveformView: UIView {
         currentFrequency = max(frequency, idleFrequency)
         currentPhaseShift = max(phaseShift, idlePhaseShift)
 
-        phase -= currentPhaseShift
-        phase2 -= currentPhaseShift * 0.5
+        phase -= currentPhaseShift * CGFloat(arc4random_uniform(100)) / 75
+        phase2 -= currentPhaseShift * 0.5 * CGFloat(arc4random_uniform(100)) / 75
         
         let mid = bounds.height / 2
         let maxAmplitude: CGFloat = mid - 4
@@ -233,7 +233,7 @@ public class WaveformView: UIView {
         
         context?.closePath()
 
-        context?.setFillColor(waveColor.cgColor)
+        context?.setFillColor(waveColor.withAlphaComponent(0.8).cgColor)
         context?.fillPath(using: .winding)
         
         // ----------------
@@ -260,7 +260,7 @@ public class WaveformView: UIView {
         
         context?.closePath()
         
-        context?.setFillColor(waveColor.lighten(byUnits: 0.2).cgColor)
+        context?.setFillColor(waveColor.lighten(byUnits: 0.2).withAlphaComponent(0.8).cgColor)
         context?.fillPath(using: .winding)
     }
 }
