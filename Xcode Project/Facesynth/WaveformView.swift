@@ -209,7 +209,7 @@ public class WaveformView: UIView {
         let mid = width / 2
         let maxAmplitude: CGFloat = halfHeight - 4
         
-        waveColor.set()
+        // ------------ Draw the bigger wave ------------
         
         for x in stride(from: 0, to: width + density, by: density) {
             let scaling: CGFloat = -pow(1 / mid * (x - mid), 2) + 1
@@ -231,12 +231,11 @@ public class WaveformView: UIView {
             context?.addLine(to: point)
         }
         
-        context?.closePath()
-
         context?.setFillColor(waveColor.withAlphaComponent(0.8).cgColor)
+        context?.closePath()
         context?.fillPath(using: .winding)
         
-        // ----------------
+        // ------------ Draw the smaller wave ------------
         
         for x in stride(from: 0, to: width + density, by: density) {
             let scaling: CGFloat = -pow(1 / mid * (x - mid), 2) + 1
@@ -258,9 +257,8 @@ public class WaveformView: UIView {
             context?.addLine(to: point)
         }
         
-        context?.closePath()
-        
         context?.setFillColor(waveColor.lighten(byUnits: 0.2).withAlphaComponent(0.8).cgColor)
+        context?.closePath()
         context?.fillPath(using: .winding)
     }
 }
