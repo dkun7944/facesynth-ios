@@ -19,6 +19,8 @@
 		4C74EC981E944FA200B419C9 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C74EC971E944FA200B419C9 /* Lato-Regular.ttf */; };
 		4C74EC9A1E944FB300B419C9 /* Lato-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C74EC991E944FB300B419C9 /* Lato-Semibold.ttf */; };
 		4C74EC9F1E945BDA00B419C9 /* UserDefaults+osUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C74EC9E1E945BDA00B419C9 /* UserDefaults+osUserDefaults.swift */; };
+		4CBF836B202E7F0B004F2BB7 /* UUIDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBF836A202E7F0B004F2BB7 /* UUIDKey.swift */; };
+		4CBF836D202E7F3F004F2BB7 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBF836C202E7F3F004F2BB7 /* BluetoothManager.swift */; };
 		4CED9E5D1FF0294A009CEF41 /* FaceTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CED9E5C1FF0294A009CEF41 /* FaceTutorialViewController.swift */; };
 		FD9D450445869F3A478DF261 /* Pods_Facesynth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 989D8AF946EC00797D392BC4 /* Pods_Facesynth.framework */; };
 /* End PBXBuildFile section */
@@ -39,6 +41,8 @@
 		4C74EC971E944FA200B419C9 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		4C74EC991E944FB300B419C9 /* Lato-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Semibold.ttf"; sourceTree = "<group>"; };
 		4C74EC9E1E945BDA00B419C9 /* UserDefaults+osUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+osUserDefaults.swift"; sourceTree = "<group>"; };
+		4CBF836A202E7F0B004F2BB7 /* UUIDKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUIDKey.swift; sourceTree = "<group>"; };
+		4CBF836C202E7F3F004F2BB7 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		4CED9E5C1FF0294A009CEF41 /* FaceTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceTutorialViewController.swift; sourceTree = "<group>"; };
 		5F82455F38C94753F6A4733E /* Pods-Facesynth.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Facesynth.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Facesynth/Pods-Facesynth.debug.xcconfig"; sourceTree = "<group>"; };
 		989D8AF946EC00797D392BC4 /* Pods_Facesynth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Facesynth.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +92,7 @@
 			children = (
 				4C5D157A1E8FD76E00D8F15C /* AppDelegate.swift */,
 				4C74EC9C1E944FCA00B419C9 /* Resources */,
+				4CBF8359202E772E004F2BB7 /* Bluetooth */,
 				4C74EC9B1E944FC200B419C9 /* View Controllers */,
 				4C74EC9D1E944FEF00B419C9 /* Other Stuff */,
 				4C5D157E1E8FD76E00D8F15C /* Main.storyboard */,
@@ -126,6 +131,15 @@
 				4C74EC9E1E945BDA00B419C9 /* UserDefaults+osUserDefaults.swift */,
 			);
 			name = "Other Stuff";
+			sourceTree = "<group>";
+		};
+		4CBF8359202E772E004F2BB7 /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				4CBF836A202E7F0B004F2BB7 /* UUIDKey.swift */,
+				4CBF836C202E7F3F004F2BB7 /* BluetoothManager.swift */,
+			);
+			name = Bluetooth;
 			sourceTree = "<group>";
 		};
 		558F74FF274A98B1FC32A1FB /* Frameworks */ = {
@@ -175,6 +189,11 @@
 						DevelopmentTeam = M24FQVR7AD;
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -286,12 +305,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C5D157D1E8FD76E00D8F15C /* MainViewController.swift in Sources */,
+				4CBF836B202E7F0B004F2BB7 /* UUIDKey.swift in Sources */,
 				4C581C5B1FEA042100755290 /* VirtualContentUpdater.swift in Sources */,
 				4CED9E5D1FF0294A009CEF41 /* FaceTutorialViewController.swift in Sources */,
 				4C74EC9F1E945BDA00B419C9 /* UserDefaults+osUserDefaults.swift in Sources */,
 				4C74EC961E944D5000B419C9 /* SwipeTutorialViewController.swift in Sources */,
 				4C5D158E1E8FD7DE00D8F15C /* Extensions.swift in Sources */,
 				4C5D157B1E8FD76E00D8F15C /* AppDelegate.swift in Sources */,
+				4CBF836D202E7F3F004F2BB7 /* BluetoothManager.swift in Sources */,
 				4C5D158F1E8FD7DE00D8F15C /* WaveformView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

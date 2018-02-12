@@ -22,10 +22,17 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Facesynth uses Bluetooth to do cool shit.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Facesynth uses the camera to see your facial expressions.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Allow Facesynth to use the microphone.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
+		<string>bluetooth-peripheral</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -30,6 +30,8 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate, 
     let modRange: ClosedRange<Double> = -30.0...30.0
     let carrierRange: ClosedRange<Double> = 1.0...4.0
     
+    var manager: BluetoothManager!
+    
     let contentUpdater = VirtualContentUpdater()
     /// Convenience accessor for the session owned by ARSCNView.
     var session: ARSession {
@@ -43,6 +45,14 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate, 
         setupSceneView()
         setupOscillator()
         setupGestureRecognizers()
+        
+        manager = BluetoothManager()
+        manager.startScan()
+        
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(tap))
+        view.addGestureRecognizer(tapGR)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(yUpdated), name: Notification.Name(rawValue: "y_received"), object: nil)
     }
     
     override public func viewWillAppear(_ animated: Bool) {
@@ -68,8 +78,12 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate, 
              */
             UIApplication.shared.isIdleTimerDisabled = true
             resetTracking()
-            view.isUserInteractionEnabled = false
+//            view.isUserInteractionEnabled = false
         }
+    }
+    
+    @objc func tap() {
+        manager.writeValue(data: "Test string")
     }
     
     func setupSceneView() {
@@ -135,13 +149,25 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate, 
     
     // MARK: - VirtualContentUpdaterDelegate
     
-    func blendShapesUpdated(_ jawOpen: Float, _ brows: Float, _ pucker: Float) {
+    @objc func yUpdated() {
+        self.blendShapesUpdated(contentUpdater.brows, contentUpdater.jawOpen, contentUpdater.pucker)
+    }
+    
+    @objc func blendShapesUpdated(_ jawOpen: Float, _ brows: Float, _ pucker: Float) {
         guard presentedViewController == nil else { return }
         
         updateOscillatorFrequency(withBrows: brows)
         updateOscillatorModulation(withJaw: jawOpen)
         updateOscillatorCarrier(withPucker: pucker)
         updateWaveform()
+        
+        let adjustedBrows = String(format: "%03d", brows.map(fromRange: 0.2...1, toRange: 0...255).int.clamped(to: 0...255))
+        let adjustedJaw = String(format: "%03d", jawOpen.map(fromRange: 0...1, toRange: 0...255).int)
+        let pitch = String(format: "%03d", contentUpdater.orientation.z.map(fromRange: -0.8...0.2, toRange: 0...255).int.clamped(to: 0...255))
+        let y = String(format: "%03d", manager.yInt.float.map(fromRange: 400...600, toRange: 0...255).int.clamped(to: 0...255))
+        
+        let string = "\(adjustedBrows),\(adjustedJaw),\(pitch),\(y)\n"
+        manager.writeValue(data: string)
         
         if jawOpen >= 0.1 && !oscillator.isPlaying {
             oscillator.play()

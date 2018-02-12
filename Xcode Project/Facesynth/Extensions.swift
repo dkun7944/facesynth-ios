@@ -1,5 +1,6 @@
 import UIKit
 import UIKit.UIGestureRecognizerSubclass
+import SceneKit
 
 public extension Comparable {
     func clamped(to limits: ClosedRange<Self>) -> Self {
@@ -99,4 +100,81 @@ public extension UIColor {
         self.getRed(&r, green: &g, blue: &b, alpha: &a)
         return UIColor(red: r+units, green: g+units, blue: b+units, alpha: a)
     }
+}
+
+extension Double {
+    func roundTo(places: Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
+    
+    var float: Float {
+        return Float(self)
+    }
+    
+    var int: Int {
+        return Int(self)
+    }
+}
+
+extension Float {
+    func roundTo(places: Int) -> Float {
+        let divisor = powf(10.0, places.float)
+        return (self * divisor).rounded() / divisor
+    }
+    
+    var int: Int {
+        return Int(self)
+    }
+    
+    func map(fromRange: ClosedRange<Float>, toRange: ClosedRange<Float>) -> Float {
+        let fromSpan = fromRange.upperBound - fromRange.lowerBound
+        let toSpan = toRange.upperBound - toRange.lowerBound
+        return (self - fromRange.lowerBound) * toSpan / fromSpan + toRange.lowerBound
+    }
+}
+
+extension Int {
+    var cgFloat: CGFloat {
+        return CGFloat(self)
+    }
+    
+    var float: Float {
+        return Float(self)
+    }
+    
+    var double: Double {
+        return Double(self)
+    }
+}
+
+extension matrix_float4x4 {
+    func position() -> SCNVector3 {
+        return SCNVector3(columns.3.x, columns.3.y, columns.3.z)
+    }
+    
+    var upperLeft3x3: float3x3 {
+        let (a,b,c,_) = columns
+        return float3x3(a.xyz, b.xyz, c.xyz)
+    }
+    
+    init(rotation: float3x3, position: float3) {
+        let (a,b,c) = rotation.columns
+        self = float4x4(float4(a, 0),
+                        float4(b, 0),
+                        float4(c, 0),
+                        float4(position, 1))
+    }
+}
+
+extension float4 {
+    var xyz: float3 {
+        return float3(x, y, z)
+    }
+    
+    init(_ vec3: float3, _ w: Float) {
+        self = float4(vec3.x, vec3.y, vec3.z, w)
+    }
+    
+    
 }

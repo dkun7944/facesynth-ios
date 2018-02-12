@@ -18,7 +18,7 @@ class VirtualContentUpdater: NSObject, ARSCNViewDelegate {
     
     var jawOpen: Float = 0.01
     var brows: Float = 0.5
-    var pucker: Float  = 0.5
+    var pucker: Float = 0.5
     
     /// - Tag: BlendShapeAnimation
     var blendShapes: [ARFaceAnchor.BlendShapeLocation : Any] = [:] {
@@ -32,6 +32,8 @@ class VirtualContentUpdater: NSObject, ARSCNViewDelegate {
         }
     }
     
+    var position: SCNVector3 = SCNVector3(0, 0, 0)
+    var orientation: SCNVector3 = SCNVector3(0, 0, 0)
     var delegate: VirtualContentUpdaterDelegate?
     
     /**
@@ -58,6 +60,14 @@ class VirtualContentUpdater: NSObject, ARSCNViewDelegate {
         DispatchQueue.main.async {
             if faceAnchor.isTracked {
                 self.blendShapes = faceAnchor.blendShapes
+                self.position = faceAnchor.transform.position()
+                
+                let r = faceAnchor.transform.upperLeft3x3
+                let yaw = atan(r[1][0] / r[0][0])
+                let pitch = atan(-r[2][0] / sqrt(pow(r[2][1], 2) + pow(r[2][2], 2)))
+                let roll = atan(r[2][1] / r[2][2])
+                
+                self.orientation = SCNVector3(yaw, pitch, roll)
             } else {
                 self.blendShapes = [.jawOpen : Float(0.01),
                                     .browInnerUp : self.brows,
