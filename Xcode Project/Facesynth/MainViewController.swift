@@ -163,7 +163,12 @@ public class MainViewController: UIViewController, UIGestureRecognizerDelegate, 
         
         let adjustedBrows = String(format: "%03d", brows.map(fromRange: 0.2...1, toRange: 0...255).int.clamped(to: 0...255))
         let adjustedJaw = String(format: "%03d", jawOpen.map(fromRange: 0...1, toRange: 0...255).int)
-        let pitch = String(format: "%03d", contentUpdater.orientation.z.map(fromRange: -0.8...0.2, toRange: 0...255).int.clamped(to: 0...255))
+//        let pitch = String(format: "%03d", contentUpdater.orientation.z.map(fromRange: -0.8...0.2, toRange: 0...128).int.clamped(to: 0...128))
+        
+        let pitch01 = contentUpdater.orientation.z.map(fromRange: -0.8...0.2, toRange: 0...1).clamped(to: 0...1)
+        let logPitch = (log(pitch01 + 0.1) + 1).clamped(to: 0...1).float
+        let pitch = String(format: "%03d", logPitch.map(fromRange: 0...1, toRange: 0...128).int.clamped(to: 0...128))
+        
         let y = String(format: "%03d", manager.yInt.float.map(fromRange: 400...600, toRange: 0...255).int.clamped(to: 0...255))
         
         let string = "\(adjustedBrows),\(adjustedJaw),\(pitch),\(y)\n"
